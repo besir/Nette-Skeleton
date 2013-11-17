@@ -1,0 +1,3 @@
+services:
+	AuthorizatorService:
+		class: \Security\AuthorizatorService

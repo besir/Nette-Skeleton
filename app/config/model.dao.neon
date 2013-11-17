@@ -1,0 +1,3 @@
+services:
+	AuthorizatorDao:
+		class: \Security\AuthorizatorDao

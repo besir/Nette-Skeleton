@@ -1,9 +1,3 @@
-#
-# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
-#
-# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
-# http://nette.org/security-warning
-#
 common:
 	parameters:
 
@@ -16,20 +10,22 @@ common:
 			errorPresenter: Error
 
 		database:
-			dsn: 'mysql:host=localhost;dbname=test'
-			user:
-			password:
+			host: 127.0.0.1
+			username: change
+			password: change
+			database: change
+			lazy: FALSE
+
+	includes:
+		- factories.neon
+		- services.neon
+		- forms.neon
+		- model.dao.neon
+		- model.service.neon
+		- components.neon
 
 		session:
 			expiration: 14 days
-
-
-	services:
-		authenticator: Authenticator
-
-
-	factories:
-
 
 production < common:
 
