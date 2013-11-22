@@ -1,13 +1,13 @@
 <?php
 
-use Nette\Application\UI;
+namespace FrontModule;
 
 
 /**
- * @author Petr Besir Horacek <sirbesir@gmail.com>
  * Sign in/out presenters.
+ * @author Petr Besir Horacek <sirbesir@gmail.com>
  */
-class SignPresenter extends BasePresenter
+class SignPresenter extends \FrontModule\FrontPresenter
 {
 
 
@@ -18,7 +18,7 @@ class SignPresenter extends BasePresenter
 	 */
 	protected function createComponentSignInForm()
 	{
-		$form = new UI\Form;
+		$form = new \Nette\Application\UI\Form;
 		$form->addText('username', 'Username:')
 			->setRequired('Please enter your username.');
 
@@ -29,19 +29,17 @@ class SignPresenter extends BasePresenter
 
 		$form->addSubmit('send', 'Sign in');
 
-		$form->onError[] = array($this, 'errorForm');
-		$form->onSuccess[] = array($this, 'signInFormSubmitted');
-
+		// call method signInFormSucceeded() on success
+		$form->onSuccess[] = $this->signInFormSucceeded;
 		return $form;
 	}
 
-
 	/**
 	 * @author Petr Besir Horacek <sirbesir@gmail.com>
-	 * @param \Nette\Application\UI\Form $form
+	 * @param  \Nette\Application\UI\Form $form
 	 * @return void
 	 */
-	public function signInFormSubmitted(\Nette\Application\UI\Form $form)
+	public function signInFormSucceeded(\Nette\Application\UI\Form $form)
 	{
 		$values = $form->getValues();
 
@@ -58,23 +56,11 @@ class SignPresenter extends BasePresenter
 			return;
 		}
 
-		$this->redirect('Front:');
+		$this->redirect('Homepage:');
 	}
 
 	/**
-	 * Add form errors to flashes
-	 * @author Petr Besir Horacek <sirbesir@gmail.com>
-	 * @param \Nette\Application\UI\Form $form
-	 */
-	public function errorForm(\Nette\Application\UI\Form $form)
-	{
-		foreach ($form->getErrors() as $error)
-		{
-			$this->getPresenter()->flashMessage($error, 'error');
-		}
-	}
-
-	/**
+	 * Sign::out action
 	 * @author Petr Besir Horacek <sirbesir@gmail.com>
 	 */
 	public function actionOut()

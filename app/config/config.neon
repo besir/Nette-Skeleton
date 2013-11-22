@@ -1,5 +1,11 @@
 common:
 	parameters:
+		database:
+			host: 127.0.0.1
+			username: change
+			password: change
+			database: change
+			lazy: FALSE
 
 	php:
 		date.timezone: Europe/Prague
@@ -9,12 +15,9 @@ common:
 		application:
 			errorPresenter: Error
 
-		database:
-			host: 127.0.0.1
-			username: change
-			password: change
-			database: change
-			lazy: FALSE
+		session:
+			expiration: 14 days
+			autoStart: true
 
 	includes:
 		- factories.neon
@@ -23,9 +26,6 @@ common:
 		- model.dao.neon
 		- model.service.neon
 		- components.neon
-
-		session:
-			expiration: 14 days
 
 production < common:
 

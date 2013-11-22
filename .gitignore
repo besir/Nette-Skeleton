@@ -1,3 +1,7 @@
+### Nette ###
+temp/cache
+temp/session
+
 ### NetBeans ###
 nbproject/private/
 build/
